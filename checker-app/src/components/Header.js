@@ -70,7 +70,7 @@ const Header = () => {
               </linearGradient>
             </defs>
           </svg>
-          NFT Wallet Checker
+          Wallet Checker
         </Logo>
       </NavBar>
     </HeaderContainer>

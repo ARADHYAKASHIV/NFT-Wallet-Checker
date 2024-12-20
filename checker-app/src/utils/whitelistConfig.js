@@ -1,7 +1,7 @@
 // Example whitelist of wallets
 export const whitelistedWallets = {
   ethereum: [
-    '0x123...', // Replace with actual whitelisted addresses
+    'GG916FiwSnryreHBHa68RaUPA5fTLutapwAMrCYkC9G', // Replace with actual whitelisted addresses
     '0x456...',
   ],
   polygon: [

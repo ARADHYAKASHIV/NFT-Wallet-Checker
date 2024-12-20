@@ -44,22 +44,6 @@ const Input = styled.input`
   }
 `;
 
-const NetworkSelect = styled.select`
-  padding: 1rem 1.5rem;
-  font-size: 1.1rem;
-  border: 2px solid rgba(99, 102, 241, 0.15);
-  border-radius: 12px;
-  background: rgba(3, 7, 18, 0.95);
-  color: #e5e7eb;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:focus {
-    outline: none;
-    border-color: #6366f1;
-  }
-`;
-
 const Button = styled.button`
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   color: white;
@@ -83,11 +67,10 @@ const Button = styled.button`
 
 const CheckerForm = ({ onSubmit }) => {
   const [walletAddress, setWalletAddress] = useState('');
-  const [network, setNetwork] = useState('ethereum');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ walletAddress, network });
+    onSubmit({ walletAddress });
   };
 
   return (
@@ -100,16 +83,7 @@ const CheckerForm = ({ onSubmit }) => {
           placeholder="Enter wallet address (0x...)"
           required
         />
-        <NetworkSelect
-          value={network}
-          onChange={(e) => setNetwork(e.target.value)}
-        >
-          <option value="ethereum">Ethereum</option>
-          <option value="polygon">Polygon</option>
-          <option value="solana">Solana</option>
-          <option value="binance">BSC</option>
-        </NetworkSelect>
-        <Button type="submit">Check NFTs</Button>
+        <Button type="submit">Check Wallet</Button>
       </Form>
     </FormContainer>
   );

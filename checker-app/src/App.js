@@ -5,51 +5,37 @@ import ResultDisplay from './components/ResultDisplay';
 import Footer from './components/Footer';
 import ContactButton from './components/ContactButton';
 import GlobalStyles from './styles/GlobalStyles';
-import { getAlchemyInstance } from './utils/alchemyConfig';
-import { checkWhitelist } from './utils/whitelistConfig';
+import { checkWhitelist } from './utils/moralisConfig';
 
 function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const handleCheck = async ({ walletAddress, network }) => {
+  const handleCheck = async ({ walletAddress }) => {
     try {
       setLoading(true);
       setError(null);
       
-      // Check if wallet is whitelisted
-      const isWhitelisted = checkWhitelist(walletAddress, network);
-      
-      const alchemy = getAlchemyInstance(network);
-      
-      // Get NFTs for the wallet
-      const nftsResponse = await alchemy.nft.getNftsForOwner(walletAddress);
-      
-      // Format the NFTs data
-      const nfts = await Promise.all(nftsResponse.ownedNfts.map(async (nft) => {
-        return {
-          name: nft.title || 'Unnamed NFT',
-          collection: nft.contract.name || 'Unknown Collection',
-          tokenId: nft.tokenId,
-          image: nft.media[0]?.gateway || 'https://via.placeholder.com/200?text=No+Image',
-          description: nft.description,
-          contractAddress: nft.contract.address,
-          tokenType: nft.tokenType,
-          timeLastUpdated: nft.timeLastUpdated,
-        };
-      }));
+      // Basic validation
+      if (!walletAddress || !walletAddress.startsWith('0x') || walletAddress.length !== 42) {
+        throw new Error('Invalid wallet address format');
+      }
 
+      // Check whitelist status using Moralis
+      const whitelistStatus = await checkWhitelist(walletAddress);
+      
       setResult({
         walletAddress,
-        network,
-        nfts,
-        totalCount: nftsResponse.totalCount,
-        isWhitelisted,
+        status: whitelistStatus.isWhitelisted ? 'Whitelisted' : 'Not Whitelisted',
+        nftCount: whitelistStatus.details.nftCount,
+        tokenCount: whitelistStatus.details.tokenCount,
+        timestamp: whitelistStatus.details.lastChecked
       });
+      
     } catch (err) {
-      setError(err.message || 'Failed to fetch NFTs');
-      console.error('Error fetching NFTs:', err);
+      setError(err.message || 'Failed to check wallet');
+      console.error('Error:', err);
     } finally {
       setLoading(false);
     }
@@ -81,7 +67,7 @@ function App() {
             textAlign: 'center',
             color: '#6366f1' 
           }}>
-            Loading NFTs...
+            Checking wallet...
           </div>
         ) : (
           <ResultDisplay result={result} />
