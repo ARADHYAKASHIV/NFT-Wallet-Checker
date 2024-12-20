@@ -1,0 +1,25 @@
+{
+  "short_name": "NFT Checker",
+  "name": "NFT Wallet Checker",
+  "icons": [
+    {
+      "src": "wallet-icon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "wallet-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "wallet-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#6366f1",
+  "background_color": "#030712"
+}
