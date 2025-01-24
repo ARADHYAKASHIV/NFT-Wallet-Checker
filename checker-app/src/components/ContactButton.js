@@ -6,6 +6,11 @@ const FloatingButton = styled.div`
   bottom: 100px;
   right: 30px;
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    bottom: 80px; /* Adjust position for mobile */
+    right: 20px; /* Adjust position for mobile */
+  }
 `;
 
 const pulse = keyframes`
@@ -58,11 +63,16 @@ const MainButton = styled.button`
     background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 60%);
     opacity: 0;
     transition: opacity 0.3s ease;
-    transform: rotate(${props => props.isOpen ? '180deg' : '0deg'});
   }
 
   &:hover::before {
     opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    width: 50px; /* Smaller button size for mobile */
+    height: 50px; /* Smaller button size for mobile */
+    font-size: 20px; /* Adjust font size for mobile */
   }
 `;
 
@@ -115,6 +125,11 @@ const ContactMenu = styled.div`
   animation: ${slideIn} 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   transform-origin: center right;
   min-width: 220px;
+
+  @media (max-width: 768px) {
+    right: 70px; /* Adjust position for mobile */
+    min-width: 180px; /* Adjust minimum width for mobile */
+  }
 `;
 
 const SocialLink = styled.a`
@@ -196,10 +211,8 @@ const ContactButton = () => {
         </SocialLink>
 
         <SocialLink href="https://twitter.com/your-handle" target="_blank" rel="noopener noreferrer">
-          <IconWrapper bgColor="rgba(29, 161, 242, 0.1)" iconColor="#1DA1F2">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-            </svg>
+          <IconWrapper bgColor="rgba(29, 161, 242, 0.1)" iconColor="">
+          <svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 512 462.799"><path fill-rule="nonzero" d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z" fill="rgb(88, 101, 242)"/></svg>
           </IconWrapper>
           <SocialText>Twitter</SocialText>
         </SocialLink>

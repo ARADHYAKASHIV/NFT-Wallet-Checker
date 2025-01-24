@@ -6,7 +6,6 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   background: rgba(17, 24, 39, 0.98);
-  backdrop-filter: blur(10px);
   padding: 1rem 0;
   z-index: 1000;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
@@ -14,11 +13,11 @@ const HeaderContainer = styled.header`
 `;
 
 const NavBar = styled.nav`
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -33,8 +32,9 @@ const Logo = styled.div`
   gap: 0.8rem;
 
   svg {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
+    fill: url(#header-gradient);
   }
 `;
 

@@ -1,16 +1,25 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import CheckerForm from './components/CheckerForm';
 import ResultDisplay from './components/ResultDisplay';
 import Footer from './components/Footer';
 import ContactButton from './components/ContactButton';
 import GlobalStyles from './styles/GlobalStyles';
-import { checkWhitelist } from './utils/moralisConfig';
+import { checkWhitelist } from './utils/whitelistConfig';
+import styled from 'styled-components';
+
+const MainContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align the content */
+  padding: 0.5rem; /* Add padding around the main content */
+`;
 
 function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [walletAddresses, setWalletAddresses] = useState([]);
 
   const handleCheck = async ({ walletAddress }) => {
     try {
@@ -22,15 +31,18 @@ function App() {
         throw new Error('Invalid wallet address format');
       }
 
-      // Check whitelist status using Moralis
-      const whitelistStatus = await checkWhitelist(walletAddress);
-      
+      console.log(`Input Address: ${walletAddress}`); // Log the input address
+
+      // Check whitelist status using the correct function
+      const isWhitelisted = checkWhitelist(walletAddress, 'ethereum');
+      console.log(`Checking address: ${walletAddress}, Whitelisted: ${isWhitelisted}`);
+
       setResult({
         walletAddress,
-        status: whitelistStatus.isWhitelisted ? 'Whitelisted' : 'Not Whitelisted',
-        nftCount: whitelistStatus.details.nftCount,
-        tokenCount: whitelistStatus.details.tokenCount,
-        timestamp: whitelistStatus.details.lastChecked
+        status: isWhitelisted ? 'Whitelisted' : 'Not Whitelisted',
+        nftCount: 0, // Placeholder, update as needed
+        tokenCount: 0, // Placeholder, update as needed
+        timestamp: new Date().toISOString() // Placeholder, update as needed
       });
       
     } catch (err) {
@@ -45,10 +57,11 @@ function App() {
     <>
       <GlobalStyles />
       <Header />
-      <main>
+      <MainContainer>
         <CheckerForm onSubmit={handleCheck} />
         {error && (
           <div style={{ 
+            top: '0',
             maxWidth: '800px', 
             margin: '1rem auto', 
             padding: '1rem', 
@@ -72,9 +85,9 @@ function App() {
         ) : (
           <ResultDisplay result={result} />
         )}
-      </main>
-      <ContactButton />
-      <Footer />
+      </MainContainer>
+      <ContactButton walletAddresses={walletAddresses} />
+      <Footer walletAddresses={walletAddresses} />
     </>
   );
 }

@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const FormContainer = styled.div`
   max-width: 800px;
-  margin: 3rem auto;
+  margin: 2rem auto; /* Adjusted margin for spacing */
   padding: 0 1.5rem;
+
+  @media (max-width: 768px) {
+    margin: 1rem; /* Adjust margin for mobile */
+    padding: 0 1rem; /* Adjust padding for mobile */
+  }
 `;
 
 const Form = styled.form`
@@ -20,6 +25,11 @@ const Form = styled.form`
 
   &:hover {
     transform: translateY(-2px);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack inputs on mobile */
+    padding: 1rem; /* Adjust padding for mobile */
   }
 `;
 
@@ -42,6 +52,11 @@ const Input = styled.input`
   &::placeholder {
     color: #4b5563;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem; /* Adjust padding for mobile */
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
 `;
 
 const Button = styled.button`
@@ -63,6 +78,11 @@ const Button = styled.button`
   &:active {
     transform: translateY(0);
   }
+
+  @media (max-width: 768px) {
+    padding: 0.75rem 1.5rem; /* Adjust padding for mobile */
+    font-size: 1rem; /* Adjust font size for mobile */
+  }
 `;
 
 const CheckerForm = ({ onSubmit }) => {
@@ -71,6 +91,7 @@ const CheckerForm = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ walletAddress });
+    setWalletAddress('');
   };
 
   return (

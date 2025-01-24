@@ -72,17 +72,8 @@ const Footer = () => {
     <FooterContainer>
       <FooterContent>
         <span>© 2024 NFT Wallet Checker</span>
-        <Divider>•</Divider>
-        <CreditText>
-          Designed & Developed by{' '}
-          <Link 
-            href="https://github.com/AradhyaKashiv" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <Name>Aradhya Kashiv</Name>
-          </Link>
-        </CreditText>
+        <Divider>|</Divider>
+        
       </FooterContent>
     </FooterContainer>
   );

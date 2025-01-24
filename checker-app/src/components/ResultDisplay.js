@@ -1,16 +1,16 @@
 import styled from 'styled-components';
+import { FaWallet, FaCheckCircle, FaTimesCircle, FaClipboardList } from 'react-icons/fa';
 
 const ResultContainer = styled.div`
   max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 1.5rem auto;
+  padding: 1rem; /* Reduced padding for compactness */
   background: rgba(17, 24, 39, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  color: white;
   animation: fadeIn 0.5s ease-out;
-  
+
   @keyframes fadeIn {
     from { 
       opacity: 0; 
@@ -21,34 +21,72 @@ const ResultContainer = styled.div`
       transform: translateY(0); 
     }
   }
+
+  @media (max-width: 768px) {
+    padding: 0.5rem; /* Further reduce padding for mobile */
+    margin: 1rem; /* Adjust margin for mobile */
+  }
 `;
 
 const ResultItem = styled.div`
-  margin: 1rem 0;
-  padding: 1rem;
-  border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+  margin: 0.5rem 0;
+  padding: 0.5rem; /* Reduced padding for compactness */
   display: flex;
   align-items: center;
-  gap: 1rem;
-  
-  &:last-child {
-    border-bottom: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* Stack items on mobile */
+    align-items: flex-start; /* Align items to the start */
+    padding: 0.5rem; /* Add padding for mobile */
   }
 `;
 
 const Label = styled.span`
   font-weight: 600;
-  color: #6b7280;
-  min-width: 120px;
+  color: #e5e7eb;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem; /* Smaller font size for compactness */
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem; /* Further reduce font size on mobile */
+  }
 `;
 
 const Value = styled.span`
-  color: #e5e7eb;
-  flex: 1;
-  
-  &.highlight {
-    color: ${props => props.status === 'Whitelisted' ? '#34d399' : '#ef4444'};
-    font-weight: 600;
+  color: #fbbf24; /* Gold color for values */
+  font-weight: 600;
+  font-size: 0.9rem; /* Smaller font size for compactness */
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem; /* Further reduce font size on mobile */
+  }
+`;
+
+const Status = styled.span`
+  color: ${props => props.status === 'Whitelisted' ? '#34d399' : '#ef4444'};
+  font-weight: 600;
+  font-size: 0.9rem; /* Smaller font size for compactness */
+
+  @media (max-width: 768px) {
+    font-size: 0.8rem; /* Further reduce font size on mobile */
+  }
+`;
+
+const IconWrapper = styled.span`
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem; /* Adjust icon size for mobile */
   }
 `;
 
@@ -58,26 +96,32 @@ const ResultDisplay = ({ result }) => {
   return (
     <ResultContainer>
       <ResultItem>
-        <Label>Wallet:</Label>
+        <Label>
+          <IconWrapper><FaWallet /></IconWrapper>
+          Wallet:
+        </Label>
         <Value>{result.walletAddress}</Value>
       </ResultItem>
       <ResultItem>
-        <Label>Status:</Label>
-        <Value className="highlight" status={result.status}>
-          {result.status}
-        </Value>
+        <Label>
+          <IconWrapper>{result.status === 'Whitelisted' ? <FaCheckCircle /> : <FaTimesCircle />}</IconWrapper>
+          Status:
+        </Label>
+        <Status status={result.status}>{result.status}</Status>
       </ResultItem>
       <ResultItem>
-        <Label>NFTs Owned:</Label>
+        <Label>
+          <IconWrapper><FaClipboardList /></IconWrapper>
+          NFTs Owned:
+        </Label>
         <Value>{result.nftCount}</Value>
       </ResultItem>
       <ResultItem>
-        <Label>Tokens Owned:</Label>
+        <Label>
+          <IconWrapper><FaClipboardList /></IconWrapper>
+          Tokens Owned:
+        </Label>
         <Value>{result.tokenCount}</Value>
-      </ResultItem>
-      <ResultItem>
-        <Label>Checked at:</Label>
-        <Value>{new Date(result.timestamp).toLocaleString()}</Value>
       </ResultItem>
     </ResultContainer>
   );
