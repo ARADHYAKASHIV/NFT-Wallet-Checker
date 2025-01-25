@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { FaWallet, FaCheckCircle, FaTimesCircle, FaClipboardList } from 'react-icons/fa';
 
@@ -24,7 +25,7 @@ const ResultContainer = styled.div`
 
   @media (max-width: 768px) {
     padding: 0.5rem; /* Further reduce padding for mobile */
-    margin: 1rem; /* Adjust margin for mobile */
+    margin: 0.5rem; /* Adjust margin for mobile */
   }
 `;
 
@@ -44,7 +45,7 @@ const ResultItem = styled.div`
   @media (max-width: 768px) {
     flex-direction: column; /* Stack items on mobile */
     align-items: flex-start; /* Align items to the start */
-    padding: 0.5rem; /* Add padding for mobile */
+    padding: 0.3rem; /* Reduce padding for mobile */
   }
 `;
 
@@ -57,7 +58,7 @@ const Label = styled.span`
   font-size: 0.9rem; /* Smaller font size for compactness */
 
   @media (max-width: 768px) {
-    font-size: 0.8rem; /* Further reduce font size on mobile */
+    font-size: 0.75rem; /* Further reduce font size on mobile */
   }
 `;
 
@@ -67,7 +68,7 @@ const Value = styled.span`
   font-size: 0.9rem; /* Smaller font size for compactness */
 
   @media (max-width: 768px) {
-    font-size: 0.8rem; /* Further reduce font size on mobile */
+    font-size: 0.75rem; /* Further reduce font size on mobile */
   }
 `;
 
@@ -77,7 +78,7 @@ const Status = styled.span`
   font-size: 0.9rem; /* Smaller font size for compactness */
 
   @media (max-width: 768px) {
-    font-size: 0.8rem; /* Further reduce font size on mobile */
+    font-size: 0.75rem; /* Further reduce font size on mobile */
   }
 `;
 
@@ -109,7 +110,8 @@ const ResultDisplay = ({ result }) => {
         </Label>
         <Status status={result.status}>{result.status}</Status>
       </ResultItem>
-      {/* <ResultItem>
+      {/* Uncomment if needed
+      <ResultItem>
         <Label>
           <IconWrapper><FaClipboardList /></IconWrapper>
           NFTs Owned:
@@ -122,7 +124,8 @@ const ResultDisplay = ({ result }) => {
           Tokens Owned:
         </Label>
         <Value>{result.tokenCount}</Value>
-      </ResultItem> */}
+      </ResultItem>
+      */}
     </ResultContainer>
   );
 };
