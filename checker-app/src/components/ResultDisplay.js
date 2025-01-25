@@ -109,7 +109,7 @@ const ResultDisplay = ({ result }) => {
         </Label>
         <Status status={result.status}>{result.status}</Status>
       </ResultItem>
-      <ResultItem>
+      {/* <ResultItem>
         <Label>
           <IconWrapper><FaClipboardList /></IconWrapper>
           NFTs Owned:
@@ -122,7 +122,7 @@ const ResultDisplay = ({ result }) => {
           Tokens Owned:
         </Label>
         <Value>{result.tokenCount}</Value>
-      </ResultItem>
+      </ResultItem> */}
     </ResultContainer>
   );
 };
