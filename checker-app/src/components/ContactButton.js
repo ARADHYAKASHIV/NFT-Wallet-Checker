@@ -70,7 +70,7 @@ const MainButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    width: 50px; /* Smaller button size for mobile */
+    width: 50px; /* Smaller button size for mobile media query */
     height: 50px; /* Smaller button size for mobile */
     font-size: 20px; /* Adjust font size for mobile */
   }
@@ -201,6 +201,7 @@ const ContactButton = () => {
       </MainButton>
 
       <ContactMenu isOpen={isOpen}>
+            // social links
         <SocialLink href="https://discord.gg/kanjix" target="_blank" rel="noopener noreferrer">
           <IconWrapper bgColor="rgba(88, 101, 242, 0.1)" iconColor="#5865F2">
             <svg viewBox="0 0 24 24" fill="currentColor">
